@@ -3,8 +3,11 @@ private with sharing class FirstDemoTest {
 
     @TestSetup
     static void makeData(){
-        Case newCase = new Case(Subject='Wsh alors');
-        insert newCase;
+        // Case newCase = new Case(Subject='Wsh alors');
+        // insert newCase;
+
+        List<Case> caseList = TestDataFactory.createCases(3);
+        insert caseList;
     }
 
     @isTest
@@ -21,11 +24,14 @@ private with sharing class FirstDemoTest {
     @isTest
     public static void caseUpdater_Pos(){
 
-        List<Case> caseList = [SELECT Id, Subject FROM CASE Where Subject = 'Wsh alors'];
+        List<Case> caseList = [SELECT Id, Subject FROM CASE Where Subject = 'Lessgui' LIMIT 1];
         Test.startTest();
             FirstDemo otherClassDemo = new FirstDemo();
-             otherClassDemo.caseUpdater(caseList[0]);
+            otherClassDemo.caseUpdater(caseList[0]);
+            otherClassDemo.otherCaseUpdateMethod();
         Test.stopTest();
+
+        Assert.areEqual('Lessgui', caseList[0].Subject, 'Subject should be Lessgui boy');
 
     }
 

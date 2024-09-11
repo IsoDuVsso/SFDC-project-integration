@@ -4,7 +4,22 @@ public with sharing class FirstDemo {
     }
 
     public void caseUpdater(Case caseTobeUpdated){
-        caseTobeUpdated.Subject = 'yeaaah boy';
+        //Execute specific code if in test scenario
+        // if(Test.isRunningTest()){
+        //     caseTobeUpdated.Subject = 'Krispy\'s Thursday';
+        // }
+        // else{
+        //     caseTobeUpdated.Subject = 'Lessgui';
+        //     otherCaseUpdateMethod();
+        //     update caseTobeUpdated;
+        // }
+        caseTobeUpdated.Subject = 'Lessgui';
+        otherCaseUpdateMethod();
         update caseTobeUpdated;
+    }
+
+    @TestVisible //allows private method to be visible in test class
+    private void otherCaseUpdateMethod(){
+        //some code...
     }
 }
